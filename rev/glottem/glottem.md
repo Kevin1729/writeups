@@ -110,7 +110,7 @@ We see that there are more than 42000 strings! How are we going to find the flag
 
 ### Just use English
 In `output.txt`, we search through the strings.
-We pretty quickly notice that some `..._free_deal` suffixes and `_two_free` substrings in some of the strings.
+We pretty quickly notice `..._free_deal` suffixes and `_two_free` substrings in some of the strings.
 
 This means that the flag message is some English phrase. Using a text search (like ctrl+f) for `_two_free_deal` a few times gets us to
 `colve_one_get_two_free_deal`. 
