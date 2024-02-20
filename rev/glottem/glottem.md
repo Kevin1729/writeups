@@ -84,7 +84,7 @@ for i in range(len(e)):
 
 Algorithmically speaking, `mat` represents a forest. Each node corresponds to (i, j), and every `k` in `mat[i][j]` corresponds to the child (i + 1, k). We want to find the paths from a root to a leaf at (26, L) for some L.
 
-We achieve this with a DFS search down the tree, which has a concise recursive implementation:
+We achieve this with a DFS search down the trees, which has a concise recursive implementation:
 ```python
 def solve(start_char, string):
     if len(string) >= 26:
@@ -94,7 +94,7 @@ def solve(start_char, string):
     for child in mat[len(string)][start_char]:
         solve(child, string + alpha[start_char])
 ```
-Finally, we run `solve()` on the roots of the tree:
+Finally, we run `solve()` on the roots of the trees:
 ```python
 for c in range(len(alpha)):
     solve(c, "")
