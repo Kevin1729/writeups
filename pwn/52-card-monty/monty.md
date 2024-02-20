@@ -123,12 +123,15 @@ The only thing we need to figure out now is where the buffer of `name` starts. W
 We can simply binary search on the length of the required input to cause a stack-smashing error:
 
 First try (error):
+
 ![image](pics/funny1.png)
 
 Second try (no error):
+
 ![image](pics/funny2.png)
 
 Third try (error):
+
 ![image](pics/funny3.png)
 
 ...This continues until we find that the longest string that we can type in as our name without causing an error is
@@ -143,7 +146,7 @@ So, the padding for our payload is 24.
 
 Next, we calculate the offset at which to index into `cards` to leak the canary. The canary is at 0x...e198 and `cards` is at 0x...dfe0. Subtracting these two gives 440 bytes, or 55 longs.
 
-Then, we calculate the offset at which to index into `cards` to leak the return address. The address is at 0x...e1a0. subtracting this from `cards` gives 448 bytes, or 57 longs.
+Then, we calculate the offset at which to index into `cards` to leak the return address. The address is at 0x...e1a8. subtracting this from `cards` gives 456 bytes, or 57 longs.
 
 Finally, we figure out the address of `win`, given the leaked return address, which we will call `ret_addr`. `ret_addr` is `<main+48>`, so `ret_addr - 48` is the address of `main`.
 
@@ -154,9 +157,9 @@ Finally, we figure out the address of `win`, given the leaked return address, wh
 The structure of our payload is:
 ```
 padding: 24 bytes
-canary: 8 bytes (at 0x...1e98)
+canary: 8 bytes (at 0x...e198)
 padding: 8 bytes
-win address: 8 bytes (at 0x...1ea8)
+win address: 8 bytes (at 0x...e1a8)
 ```
 
 We use Python's pwntools to help us write this. The script is in `attack.py`.
